@@ -12,5 +12,4 @@ public class AppConfig {
     public Distance distance() {
         return new DistanceImpl();
     }
-
 }
