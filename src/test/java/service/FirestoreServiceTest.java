@@ -6,11 +6,10 @@ import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.Firestore;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import service.FirestoreService;
+import com.Member.aiml_server_2024.service.FirestoreService;
 
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
