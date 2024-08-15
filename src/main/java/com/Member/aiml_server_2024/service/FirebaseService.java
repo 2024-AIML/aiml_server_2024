@@ -1,4 +1,4 @@
-package service;
+package com.Member.aiml_server_2024.service;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
