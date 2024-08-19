@@ -21,6 +21,7 @@
 //                .csrf(csrf -> csrf.disable()) // CSRF 보호 비활성화
 //                .authorizeHttpRequests(auth -> auth
 //                        .requestMatchers("/navi").permitAll() // "/navi" 엔드포인트 허용
+//                        requestMatchers("/api/address").permitAll() // 주소변환 api 허용
 //                        .anyRequest().authenticated() // 나머지 요청은 인증 필요
 //                )
 //                .httpBasic(withDefaults()); // HTTP Basic 인증 사용
