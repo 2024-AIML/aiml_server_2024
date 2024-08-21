@@ -34,4 +34,18 @@ public class LocationServiceImpl implements LocationService {
 
         return list;
     }
+
+//    @Override
+//    public List<Location> getLocations() throws ExecutionException, InterruptedException {
+//        List<Location> list = new ArrayList<>();
+//        Firestore firestore = FirestoreClient.getFirestore();
+//
+//        CollectionReference collectionReference = firestore.collection("USERS");
+//        List<QueryDocumentSnapshot> documents = collectionReference.get().get().getDocuments();
+//        for (QueryDocumentSnapshot document : documents) {
+//            list.add(document.toObject(Location.class));
+//        }
+//
+//        return list;
+//    }
 }

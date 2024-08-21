@@ -30,4 +30,5 @@ public class FirebaseController {
         List<Location> list = locationService.getLocations();
         return ResponseEntity.ok(list);
     }
+
 }
