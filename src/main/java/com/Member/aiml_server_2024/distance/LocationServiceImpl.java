@@ -12,13 +12,27 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 @Service
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class LocationServiceImpl implements LocationService {
-    private final LocationDao locationDao;
+//    private final LocationDao locationDao;
+//
+//    @Override
+//    public List<Location> getLocations() throws ExecutionException, InterruptedException {
+//        return locationDao.getLocations();
+//    }
 
     @Override
     public List<Location> getLocations() throws ExecutionException, InterruptedException {
-        return locationDao.getLocations();
+        List<Location> list = new ArrayList<>();
+        Firestore firestore = FirestoreClient.getFirestore();
+
+        CollectionReference collectionReference = firestore.collection("USERS");
+        List<QueryDocumentSnapshot> documents = collectionReference.get().get().getDocuments();
+        for (QueryDocumentSnapshot document : documents) {
+            list.add(document.toObject(Location.class));
+        }
+
+        return list;
     }
 
 //    @Override
