@@ -16,7 +16,7 @@ import java.util.concurrent.ExecutionException;
 @Slf4j
 public class LocationDao {
 
-    public static final String COLLECTION_NAME = "USERS";
+    public static final String COLLECTION_NAME = "users";
 
     public List<Location> getLocations() throws ExecutionException, InterruptedException {
         List<Location> list = new ArrayList<>();
