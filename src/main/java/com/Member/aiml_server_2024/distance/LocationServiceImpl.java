@@ -14,7 +14,8 @@ import java.util.concurrent.ExecutionException;
 @Service
 @RequiredArgsConstructor
 public class LocationServiceImpl implements LocationService {
-    private final LocationDao locationDao;
+    private final LocationDao locationDao;  // DB에서 location을 받는 함수
+    private Location location;  // DB에서 위도, 경도, 위치를 받아옴
 
     @Override
     public List<Location> getLocations() throws ExecutionException, InterruptedException {
