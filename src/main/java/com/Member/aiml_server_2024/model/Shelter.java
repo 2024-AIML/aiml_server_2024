@@ -6,6 +6,7 @@ public class Shelter {
     public String location;
     public Double area;
     public Integer capacity;
+    public Integer nowCount;
     public String fullAddress;
     private Double latitude_EPSG4326;
     private Double longitude_EPSG4326;
@@ -42,6 +43,13 @@ public class Shelter {
         this.capacity = capacity;
     }
 
+    public Integer getNowCount() {return nowCount;}
+
+    //public void SetNowCount(Integer nowCount) { this.nowCount = nowCount;}
+
+    public void setNowCount(int i) {
+    }
+
     public String getFullAddress(){
         return fullAddress;
     }
@@ -73,4 +81,6 @@ public class Shelter {
         }
         return String.join(" ", words[0], words[1]);
     }
+
+
 }

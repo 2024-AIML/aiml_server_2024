@@ -39,6 +39,11 @@ dependencies {
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 }
 
+test{
+	jvmArgs '-XX:+EnableDynamicAgentLoading'
+	jvmArgs '-Xshare:auto'
+}
+
 tasks.named('test') {
 	useJUnitPlatform()
 }
