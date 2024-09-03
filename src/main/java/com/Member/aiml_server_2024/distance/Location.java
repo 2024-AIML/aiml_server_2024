@@ -29,29 +29,13 @@ import lombok.Setter;
 @Setter
 public class Location {
 
-    private String latitude;    // 위도
-    private String longitude;   // 경도
+    private double latitude;    // 위도
+    private double longitude;   // 경도
     private String location;    // 위치 이름
-//    private String name;
-//
-//    // 생성자 추가
-//    public Location(String name) {
-//        this.name = name;
-//    }
-//
-//    // equals() 및 hashCode()를 오버라이드 하는 것이 좋습니다. 테스트에서 객체 비교를 위해서입니다.
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//
-//        Location location = (Location) o;
-//
-//        return name != null ? name.equals(location.name) : location.name == null;
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return name != null ? name.hashCode() : 0;
-//    }
+
+    public Location(double latitude, double longitude, String location) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.location = location;
+    }
 }
