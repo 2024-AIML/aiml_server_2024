@@ -1,5 +1,6 @@
 package com.Member.aiml_server_2024.distance;
 
+import com.Member.aiml_server_2024.distance.Location;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.QueryDocumentSnapshot;

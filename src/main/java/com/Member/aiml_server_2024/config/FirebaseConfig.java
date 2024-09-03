@@ -19,7 +19,6 @@ public class FirebaseConfig {
         if (FirebaseApp.getApps().isEmpty()) { // Initialize FirebaseApp only if it's not already initialized
             FileInputStream serviceAccount =
                     new FileInputStream("src/main/resources/firebase/serviceAccountKey.json");
-
             FirebaseOptions options = new FirebaseOptions.Builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
                     .build();
