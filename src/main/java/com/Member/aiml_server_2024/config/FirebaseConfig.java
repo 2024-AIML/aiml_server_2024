@@ -15,7 +15,6 @@ import java.io.InputStream;
 public class FirebaseConfig {
 
     @PostConstruct
-//    @Bean
     public void firestore() throws IOException {
         FileInputStream serviceAccount =
                 new FileInputStream("src/main/resources/firebase/serviceAccountKey.json");
