@@ -35,77 +35,82 @@ public class CountingServiceTest {
         MockitoAnnotations.openMocks(this);
     }
 
+    @Test
+    public void testUpdateOccupiedUsersInShelters_UserWithinRange() throws ExecutionException, InterruptedException {
+        // Mock Data
+        GeoPoint userLocation = new GeoPoint(37.7749, -122.4194);
+        GeoPoint shelterLocation = new GeoPoint(37.7749, -122.4195);
 
-//    @Test
-//    public void testUpdateOccupiedUsersInShelters_UserWithinRange() throws ExecutionException, InterruptedException {
-//        // Mock Data
-//        GeoPoint userLocation = new GeoPoint(37.7749, -122.4194);
-//        GeoPoint shelterLocation = new GeoPoint(37.7749, -122.4195);
-//
-//        String userId = "user1";
-//        String shelterId = "shelter1";
-//        String shelterName = "Test Shelter";
-//
-//        QueryDocumentSnapshot mockUserDoc = mock(QueryDocumentSnapshot.class);
-//        when(mockUserDoc.getGeoPoint("location")).thenReturn(userLocation);
-//        when(mockUserDoc.getId()).thenReturn(userId);
-//
-//        QueryDocumentSnapshot mockShelterDoc = mock(QueryDocumentSnapshot.class);
-//        when(mockShelterDoc.getGeoPoint("location")).thenReturn(shelterLocation);
-//        when(mockShelterDoc.getString("name")).thenReturn(shelterName);
-//        when(mockShelterDoc.getId()).thenReturn(shelterId);
-//
-//        // Mocking Firestore Collections
-//        CollectionReference mockShelterCollection = mock(CollectionReference.class);
-//        ApiFuture<QuerySnapshot> mockShelterFuture = mock(ApiFuture.class);
-//        QuerySnapshot mockShelterSnapshot = mock(QuerySnapshot.class);
-//        when(mockShelterCollection.get()).thenReturn(mockShelterFuture);
-//        when(mockShelterFuture.get()).thenReturn(mockShelterSnapshot);
-//        when(mockShelterSnapshot.getDocuments()).thenReturn(Collections.singletonList(mockShelterDoc));
-//        when(firestore.collection("shelterList")).thenReturn(mockShelterCollection);
-//
-//        CollectionReference mockUserCollection = mock(CollectionReference.class);
-//        ApiFuture<QuerySnapshot> mockUserFuture = mock(ApiFuture.class);
-//        QuerySnapshot mockUserSnapshot = mock(QuerySnapshot.class);
-//        when(mockUserCollection.get()).thenReturn(mockUserFuture);
-//        when(mockUserFuture.get()).thenReturn(mockUserSnapshot);
-//        when(mockUserSnapshot.getDocuments()).thenReturn(Collections.singletonList(mockUserDoc));
-//        when(firestore.collection("users")).thenReturn(mockUserCollection);
-//
-//        // Mock Distance Calculation (within 20m)
-//        when(distanceService.getDistanceByGeoPoint(userLocation, shelterLocation)).thenReturn(10.0);
-//
-//        // Mock Firestore Updates
-//        ApiFuture<WriteResult> mockWriteResult = mock(ApiFuture.class);
-//        DocumentReference mockShelterDocRef = mock(DocumentReference.class);
-//        CollectionReference mockOccupiedCollection = mock(CollectionReference.class);
-//        DocumentReference mockOccupiedDocRef = mock(DocumentReference.class);
-//
-//        // Mock Firestore Document References
-//        when(firestore.collection("shelterList").document(shelterId)).thenReturn(mockShelterDocRef);
-//        when(mockShelterDocRef.collection("occupied")).thenReturn(mockOccupiedCollection);
-//        when(mockOccupiedCollection.document(userId)).thenReturn(mockOccupiedDocRef);
-//
-//        // Mock update() with specific arguments
-//        Map<String, Object> occupiedData = new HashMap<>();
-//        occupiedData.put("userId", userId);
-//        when(mockShelterDocRef.update("occupied", FieldValue.arrayUnion(userId))).thenReturn(mockWriteResult);
-//
-//        when(firestore.collection("users").document(userId)).thenReturn(mockShelterDocRef);
-//
-//        // Mock update() for the user's 'here' field
-//        when(mockShelterDocRef.update("here", shelterName)).thenReturn(mockWriteResult);
-//
-//        // Execute the method under test
-//        countingService.updateOccupiedUsersInShelters();
-//
-//        // Verify occupied collection update
-//        verify(mockShelterDocRef).update("occupied", FieldValue.arrayUnion(userId));
-//
-//        // Verify user's here field update
-//        verify(mockShelterDocRef).update("here", shelterName);
-//    }
-//
+        String userId = "user1";
+        String shelterId = "shelter1";
+        String shelterName = "Test Shelter";
+
+        QueryDocumentSnapshot mockUserDoc = mock(QueryDocumentSnapshot.class);
+        when(mockUserDoc.getGeoPoint("location")).thenReturn(userLocation);
+        when(mockUserDoc.getId()).thenReturn(userId);
+
+        QueryDocumentSnapshot mockShelterDoc = mock(QueryDocumentSnapshot.class);
+        when(mockShelterDoc.getGeoPoint("location")).thenReturn(shelterLocation);
+        when(mockShelterDoc.getString("name")).thenReturn(shelterName);
+        when(mockShelterDoc.getId()).thenReturn(shelterId);
+
+        // Mocking Firestore Collections
+        CollectionReference mockShelterCollection = mock(CollectionReference.class);
+        ApiFuture<QuerySnapshot> mockShelterFuture = mock(ApiFuture.class);
+        QuerySnapshot mockShelterSnapshot = mock(QuerySnapshot.class);
+        when(mockShelterCollection.get()).thenReturn(mockShelterFuture);
+        when(mockShelterFuture.get()).thenReturn(mockShelterSnapshot);
+        when(mockShelterSnapshot.getDocuments()).thenReturn(Collections.singletonList(mockShelterDoc));
+        when(firestore.collection("shelterList")).thenReturn(mockShelterCollection);
+
+        CollectionReference mockUserCollection = mock(CollectionReference.class);
+        ApiFuture<QuerySnapshot> mockUserFuture = mock(ApiFuture.class);
+        QuerySnapshot mockUserSnapshot = mock(QuerySnapshot.class);
+        when(mockUserCollection.get()).thenReturn(mockUserFuture);
+        when(mockUserFuture.get()).thenReturn(mockUserSnapshot);
+        when(mockUserSnapshot.getDocuments()).thenReturn(Collections.singletonList(mockUserDoc));
+        when(firestore.collection("users")).thenReturn(mockUserCollection);
+
+        // Mock Distance Calculation (within 20m)
+        when(distanceService.getDistanceByGeoPoint(userLocation, shelterLocation)).thenReturn(10.0);
+
+        // Mock Firestore Updates
+        ApiFuture<WriteResult> mockWriteResult = mock(ApiFuture.class);
+
+        // Separate Document References for Shelter and User
+        DocumentReference mockShelterDocRef = mock(DocumentReference.class);
+        DocumentReference mockUserDocRef = mock(DocumentReference.class);
+        CollectionReference mockOccupiedCollection = mock(CollectionReference.class);
+        DocumentReference mockOccupiedDocRef = mock(DocumentReference.class);
+
+        // Mock Firestore Document References
+        when(firestore.collection("shelterList").document(shelterId)).thenReturn(mockShelterDocRef);
+        when(mockShelterDocRef.collection("occupied")).thenReturn(mockOccupiedCollection);
+        when(mockOccupiedCollection.document(userId)).thenReturn(mockOccupiedDocRef);
+
+        // Mock set() for adding the user to the occupied collection
+        doAnswer(invocation -> {
+            System.out.println("User added to occupied collection: " + userId);
+            return null;
+        }).when(mockOccupiedDocRef).set(anyMap());
+
+        // Mock update() for the user's 'here' field
+        when(firestore.collection("users").document(userId)).thenReturn(mockUserDocRef);
+        doAnswer(invocation -> {
+            System.out.println("User's 'here' field updated to: " + shelterName);
+            return null;
+        }).when(mockUserDocRef).update("here", shelterName);
+
+        // Execute the method under test
+        countingService.updateOccupiedUsersInShelters();
+
+        // Verify user is added to the shelter's occupied collection
+        verify(mockOccupiedDocRef).set(anyMap());
+
+        // Verify user's here field is updated
+        verify(mockUserDocRef).update("here", shelterName);
+    }
+
 
     @Test
     public void testUpdateOccupiedUsersInShelters_UserOutOfRange() throws ExecutionException, InterruptedException {
