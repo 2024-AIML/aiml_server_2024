@@ -44,7 +44,7 @@ public class DistanceServiceImpl2Test {
     @BeforeAll
     static void initializeFirebase() {
         try {
-            FileInputStream serviceAccount = new FileInputStream("path/to/serviceAccountKey.json");
+            FileInputStream serviceAccount = new FileInputStream("src/main/resources/firebase/serviceAccountKey.json");
 
             FirebaseOptions options = FirebaseOptions.builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))

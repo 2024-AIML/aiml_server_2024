@@ -1,4 +1,4 @@
-package com.Member.aiml_server_2024;
+package com.Member.aiml_server_2024.controller;
 
 import com.Member.aiml_server_2024.distance.DistanceService;
 import com.Member.aiml_server_2024.distance.Location;
@@ -15,7 +15,7 @@ import java.util.concurrent.ExecutionException;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/test")
+@RequestMapping("/location")
 public class FirebaseController {
 
     //    private final FirebaseService testservice;
