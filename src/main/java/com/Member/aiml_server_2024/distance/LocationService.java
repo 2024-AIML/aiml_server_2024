@@ -8,4 +8,5 @@ import java.util.concurrent.ExecutionException;
 public interface LocationService {
 
     List<Location> getLocations() throws ExecutionException, InterruptedException;
+
 }

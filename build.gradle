@@ -32,6 +32,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
 	implementation 'io.jsonwebtoken:jjwt:0.12.3'
+	implementation 'org.mockito:mockito-core'
 	testImplementation 'org.springframework.security:spring-security-test'
 
 
