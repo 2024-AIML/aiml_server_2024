@@ -27,7 +27,7 @@ public class SecurityConfig {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web -> web.ignoring().requestMatchers("/location/**", "/UserInfo/get"));
+        return (web -> web.ignoring().requestMatchers("/location/**", "/UserInfo/get", "/post/**"));
         // 예외처리 하고 싶은 url
     }
 
