@@ -2,6 +2,7 @@ package com.Member.aiml_server_2024.navigation;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.api.client.util.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -9,7 +10,10 @@ import org.springframework.web.util.UriComponentsBuilder;
 @Service
 public class GeocodingServiceImpl implements GeocodingService {
 
-    private final String apiKey = "AIzaSyAWxd0Oro0zSSYhUMaKnlf1rOf-3O_tOhI";
+//    private final String apiKey = "AIzaSyAWxd0Oro0zSSYhUMaKnlf1rOf-3O_tOhI";
+
+    @Value("${google.api.key}")
+    private String apiKey;
     private final RestTemplate restTemplate = new RestTemplate();
 
 
