@@ -1,13 +1,12 @@
 package com.Member.aiml_server_2024.controller;
 
 import com.Member.aiml_server_2024.config.auth.JwtTokenProvider;
-import com.Member.aiml_server_2024.userInfo.Member;
-import com.Member.aiml_server_2024.userInfo.MemberRepository;
-import com.Member.aiml_server_2024.userInfo.MemberService;
-import com.Member.aiml_server_2024.userInfo.UserInfoService;
+import com.Member.aiml_server_2024.userInfo.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.concurrent.ExecutionException;
 
 @RestController
 public class MemberApiController {
@@ -24,8 +23,11 @@ public class MemberApiController {
     }
 
     @PostMapping("/api/member")
-    public void save(@RequestBody Member.SaveRequest member) {
+    public void save(@RequestBody Member.SaveRequest member) throws ExecutionException, InterruptedException {
         memberService.save(member);
+
+        Member mem = member.toEntity();
+        userInfoService.saveUserInfo(mem);
 
     }
 

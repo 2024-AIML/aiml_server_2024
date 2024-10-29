@@ -1,5 +1,6 @@
 package com.Member.aiml_server_2024.controller;
 
+import com.Member.aiml_server_2024.userInfo.Member;
 import com.Member.aiml_server_2024.userInfo.UserInfo;
 import com.Member.aiml_server_2024.userInfo.UserInfoServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -15,13 +16,13 @@ public class UserInfoController {
     private final UserInfoServiceImpl userInfoService;
 
     @PostMapping("/save")
-    public void saveUserInfo(@RequestBody UserInfo userInfo) throws ExecutionException, InterruptedException {
+    public void saveUserInfo(@RequestBody Member userInfo) throws ExecutionException, InterruptedException {
         userInfoService.saveUserInfo(userInfo);
     }
 
     @GetMapping("/get")
-    public UserInfo getUserInfo(@RequestParam String id) throws ExecutionException, InterruptedException {
-        UserInfo us = userInfoService.getUserInfo(id);
+    public Member getUserInfo(@RequestParam String id) throws ExecutionException, InterruptedException {
+        Member us = userInfoService.getUserInfo(id);
         return us;
     }
 }

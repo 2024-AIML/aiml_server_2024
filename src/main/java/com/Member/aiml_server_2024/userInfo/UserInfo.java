@@ -9,16 +9,15 @@ import lombok.Setter;
 @Setter
 public class UserInfo {
 
-    //    private String name;
-//    private String phoneNum;
+    private String name;
+    private String password;
+    private String phoneNum;
     private String id;
-
-//    public UserInfo(String name, String phoneNum) {
-//        this.name = name;
-//        this.phoneNum = phoneNum;
-//    }
 
     public UserInfo(String id) {
         this.id = id;
+        this.password = password;
+        this.name = name;
+        this.phoneNum = phoneNum;
     }
 }

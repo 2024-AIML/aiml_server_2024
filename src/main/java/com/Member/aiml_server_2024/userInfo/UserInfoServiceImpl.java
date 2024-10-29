@@ -16,25 +16,25 @@ public class UserInfoServiceImpl implements UserInfoService {
     public static final String COLLECTION_NAME = "USERS";
 
     @Override
-    public void saveUserInfo(UserInfo userInfo) throws ExecutionException, InterruptedException {
+    public void saveUserInfo(Member member) throws ExecutionException, InterruptedException {
         Firestore db = FirestoreClient.getFirestore();
-        ApiFuture<WriteResult> collectionApiFUture = db.collection(COLLECTION_NAME).document(userInfo.getId()).set(userInfo);
-    }   // id 반환
+        ApiFuture<WriteResult> collectionApiFUture = db.collection(COLLECTION_NAME).document(member.getId()).set(member);
+    }
     
     @Override
-    public UserInfo getUserInfo(String name) throws ExecutionException, InterruptedException {
+    public Member getUserInfo(String name) throws ExecutionException, InterruptedException {
         Firestore db = FirestoreClient.getFirestore();
         DocumentReference documentReference = db.collection(COLLECTION_NAME).document(name);
 
         ApiFuture<DocumentSnapshot> future = documentReference.get();
         DocumentSnapshot document = future.get();
 
-        UserInfo userinfo = null;
+        Member userinfo = null;
         if (!document.exists()) {
             return null;
         }
 
-        userinfo = document.toObject(UserInfo.class);
+        userinfo = document.toObject(Member.class);
         return userinfo;
     }
     
