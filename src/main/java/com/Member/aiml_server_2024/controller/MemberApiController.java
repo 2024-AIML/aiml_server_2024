@@ -4,6 +4,7 @@ import com.Member.aiml_server_2024.config.auth.JwtTokenProvider;
 import com.Member.aiml_server_2024.userInfo.Member;
 import com.Member.aiml_server_2024.userInfo.MemberRepository;
 import com.Member.aiml_server_2024.userInfo.MemberService;
+import com.Member.aiml_server_2024.userInfo.UserInfoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -13,16 +14,19 @@ public class MemberApiController {
     private final MemberService memberService;
     private final JwtTokenProvider jwtTokenProvider;
     private final MemberRepository memberRepository;
+    private final UserInfoService userInfoService;
 
-    public MemberApiController(MemberService memberService, JwtTokenProvider jwtTokenProvider, MemberRepository memberRepository) {
+    public MemberApiController(MemberService memberService, JwtTokenProvider jwtTokenProvider, MemberRepository memberRepository, UserInfoService userInfoService) {
         this.memberService = memberService;
         this.jwtTokenProvider = jwtTokenProvider;
         this.memberRepository = memberRepository;
+        this.userInfoService = userInfoService;
     }
 
     @PostMapping("/api/member")
     public void save(@RequestBody Member.SaveRequest member) {
         memberService.save(member);
+
     }
 
 //    @GetMapping("/api/member/info")
