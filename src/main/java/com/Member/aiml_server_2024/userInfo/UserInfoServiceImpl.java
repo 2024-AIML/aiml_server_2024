@@ -13,7 +13,7 @@ import java.util.concurrent.ExecutionException;
 @Service
 public class UserInfoServiceImpl implements UserInfoService {
 
-    public static final String COLLECTION_NAME = "USERS";
+    public static final String COLLECTION_NAME = "USER_INFO";
 
     @Override
     public void saveUserInfo(Member member) throws ExecutionException, InterruptedException {
