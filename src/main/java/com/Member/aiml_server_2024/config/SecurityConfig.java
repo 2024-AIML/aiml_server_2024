@@ -35,11 +35,11 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/infra_info").authenticated()
+                        .requestMatchers("/infra_info", "/navigator").authenticated()
                         .anyRequest().permitAll()
                 )
                 .formLogin(form -> form
-                                .loginPage("/navigator")    // 사용자 정의 로그인 페이지
+                                .loginPage("/login")    // 사용자 정의 로그인 페이지
                                 .loginProcessingUrl("/api/login")   // 로그인 처리 URL
                                 .usernameParameter("id")
                                 .passwordParameter("password")
@@ -69,7 +69,7 @@ public class SecurityConfig {
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")   // 로그이웃 처리 URL
-                        .logoutSuccessUrl("/navigator")
+                        .logoutSuccessUrl("/Mypage")
                 )
                 .csrf(csrf -> csrf.disable());
 
