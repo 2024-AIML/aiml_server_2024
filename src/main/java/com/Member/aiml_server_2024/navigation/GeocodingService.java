@@ -11,5 +11,5 @@ public interface GeocodingService {
 
     void savaLocation(UserLocation userLocation) throws ExecutionException, InterruptedException;
 
-    String getLocations(String userId) throws ExecutionException, InterruptedException;
+    String getLocations(String userId, String shelterName) throws ExecutionException, InterruptedException;
 }

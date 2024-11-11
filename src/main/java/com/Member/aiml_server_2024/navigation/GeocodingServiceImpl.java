@@ -4,10 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.api.client.util.Value;
 import com.google.api.core.ApiFuture;
-import com.google.cloud.firestore.DocumentReference;
-import com.google.cloud.firestore.DocumentSnapshot;
-import com.google.cloud.firestore.Firestore;
-import com.google.cloud.firestore.WriteResult;
+import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
@@ -76,7 +73,7 @@ public class GeocodingServiceImpl implements GeocodingService {
     }
 
     @Override
-    public String getLocations(String userId) throws ExecutionException, InterruptedException {
+    public String getLocations(String userId, String shelterName) throws ExecutionException, InterruptedException {
         Firestore db = FirestoreClient.getFirestore();
 
         // USER_LOCATION에서 해당 사용자의 정보 가져오기
@@ -89,14 +86,23 @@ public class GeocodingServiceImpl implements GeocodingService {
             userLocation = userLocationDoc.toObject(UserLocation.class);
         }
 
-        // "홍익대학교"의 Shelter 정보 가져오기
-        DocumentReference shelterRef = db.collection("Shelter").document("홍익대학교");
-        ApiFuture<DocumentSnapshot> shelterFuture = shelterRef.get();
-        DocumentSnapshot shelterDoc = shelterFuture.get();
+        // Shelter 컬렉션에서 sheltername으로 해당 문서 가져오기
+//        DocumentReference shelterRef = db.collection("Shelter").document("홍익대학교");
+//        ApiFuture<DocumentSnapshot> shelterFuture = shelterRef.get();
+//        DocumentSnapshot shelterDoc = shelterFuture.get();
+        ApiFuture<QuerySnapshot> shelterQueryFuture = db.collection("Shelter")
+                .whereEqualTo("sheltername", shelterName)
+                .get();
+        QuerySnapshot shelterQuerySnapshot = shelterQueryFuture.get();
 
         Shelter shelter = null;
-        if (shelterDoc.exists()) {
+        if (!shelterQuerySnapshot.getDocuments().isEmpty()) {
+            DocumentSnapshot shelterDoc = shelterQuerySnapshot.getDocuments().get(0);
             shelter = shelterDoc.toObject(Shelter.class);
+        }
+
+        if (shelter == null) {
+            return "Shelter not found";
         }
 
         // URL 인코딩

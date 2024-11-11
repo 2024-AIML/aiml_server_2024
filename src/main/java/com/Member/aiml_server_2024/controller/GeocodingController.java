@@ -32,8 +32,8 @@ public class GeocodingController {
         return ResponseEntity.ok("Location saved successfully");
     }
 
-    @GetMapping("/{userId}")
-    public String getLocation(@PathVariable String userId) throws Exception {
-        return geocodingService.getLocations(userId);
+    @GetMapping("/{userId}/{shelterName}")
+    public String getLocation(@PathVariable String userId, @PathVariable String shelterName) throws Exception {
+        return geocodingService.getLocations(userId, shelterName);
     }
 }
