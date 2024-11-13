@@ -14,7 +14,7 @@
 
 [//]: # (![]&#40;https://img.shields.io/static/v1?label=&message=ON&color=blue&#41;)
 
-### 로그인
+### 회원가입
 
 > ![](https://img.shields.io/static/v1?label=&message=POST&color=brightgreen) <br>
 > **/api/member**
@@ -49,6 +49,52 @@
 
 ```
 {
+}
+```
+
+</details>
+<br>
+
+### 로그인
+
+> ![](https://img.shields.io/static/v1?label=&message=POST&color=brightgreen) <br>
+> **/api/login**
+
+<details markdown="1">
+<summary>detail</summary>
+
+#### Parameters
+
+##### Body
+
+| parameter | type |   description   | required |
+|:---------:| :---: |:---------------:| :---: |
+|    id     | string | 로그인 할 사용자의 아이디  | **Required** |
+| password  | string | 로그인 할 사용자의 비밀번호 | **Required** |
+
+### Example request
+```
+{
+  "id": "test123",
+  "password": "$2a$10$DovfY8drJ2zBRi0rdwB7Ve3q3W4.FrYpIy34eY7nfyf5fahsSQrmS",
+}
+```
+
+#### Example response
+
+<summary>200 Ok : 성공적으로 로그인 된 경우</summary>
+
+```
+{
+    "message", "Login successful"
+}
+```
+
+<summary>401 : 로그인이 실패한 경우</summary>
+
+```
+{
+    "message", "Login failed"
 }
 ```
 
