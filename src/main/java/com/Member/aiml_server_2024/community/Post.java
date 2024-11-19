@@ -21,4 +21,7 @@ public class Post {
     private String id;
     private String title;
     private String content;
+
+    private String latitude;
+    private String longitude;
 }
